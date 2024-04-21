@@ -1,0 +1,8 @@
+[Unit]
+Description=Clean up Isso demo files, set up and restart
+
+[Service]
+Type=oneshot
+ExecStartPre=/bin/systemctl stop gunicorn-isso.service
+ExecStart=/bin/cp /home/isso/comments-demo.db /home/isso/dbs/isso-comments.db
+ExecStartPost=/bin/systemctl enable --now gunicorn-isso.service
